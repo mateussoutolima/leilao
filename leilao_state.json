@@ -5,7 +5,7 @@
    "name": "Imoveis Joao Pessoa",
    "enabled": true,
    "scoreMin": 0,
-   "descMin": 50,
+   "descMin": 40,
    "precoMax": null,
    "ppm2Max": null,
    "quartosMin": 1,
