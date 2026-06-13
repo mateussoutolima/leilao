@@ -287,6 +287,8 @@ def build_message_body(alarm, news):
             f"• {('%.0f%% off' % d) if d is not None else ''} · {fmt_brl(r.get('preco'))} · "
             f"{r.get('tipo') or ''} — {r.get('cidade')}/{r.get('bairro') or ''} · score {r.get('score')}"
         )
+        if r.get('endereco'):
+            lines.append(f"  📍 {r['endereco']}")
         lines.append(f"  {r.get('link')}")
     if len(news) > MSG_MAX_ITEMS:
         lines.append(f"…+{len(news) - MSG_MAX_ITEMS} outras no painel.")
