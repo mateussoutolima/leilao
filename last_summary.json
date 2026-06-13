@@ -1,13 +1,164 @@
 {
-  "csv": "Lista_imoveis_PB_20260613_125725.csv",
+  "csv": "Lista_imoveis_PB_20260613_130457.csv",
   "total": 424,
-  "new": 0,
+  "new": 424,
   "matched": 61,
-  "matchedNew": 0,
+  "matchedNew": 61,
   "toValidate": 183,
   "alreadyValidated": 399,
-  "baselineSet": true,
-  "whatsappQueued": 0,
-  "lastRun": "13/06/2026 12:58",
-  "topNew": []
+  "baselineSet": false,
+  "whatsappQueued": 3,
+  "lastRun": "13/06/2026 13:06",
+  "topNew": [
+    {
+      "id": "8787713030449",
+      "score": 77.2,
+      "desconto": 56.28,
+      "preco": 53340.16,
+      "cidade": "JOAO PESSOA",
+      "bairro": "VALENTINA DE FIGUEIREDO",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449"
+    },
+    {
+      "id": "8787701106364",
+      "score": 76.6,
+      "desconto": 55.8,
+      "preco": 56139.9,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787701106364"
+    },
+    {
+      "id": "8444403331561",
+      "score": 74.9,
+      "desconto": 48.09,
+      "preco": 63860.64,
+      "cidade": "JOAO PESSOA",
+      "bairro": "PARATIBE",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444403331561"
+    },
+    {
+      "id": "8444413019307",
+      "score": 73.4,
+      "desconto": 46.92,
+      "preco": 79621.59,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444413019307"
+    },
+    {
+      "id": "8787716849732",
+      "score": 73.4,
+      "desconto": 46.92,
+      "preco": 82275.64,
+      "cidade": "JOAO PESSOA",
+      "bairro": "PARATIBE",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787716849732"
+    },
+    {
+      "id": "8787704234452",
+      "score": 73.1,
+      "desconto": 53.04,
+      "preco": 64815.06,
+      "cidade": "JOAO PESSOA",
+      "bairro": "VALENTINA DE FIGUEIREDO",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452"
+    },
+    {
+      "id": "8787710863857",
+      "score": 73.1,
+      "desconto": 53.04,
+      "preco": 64345.39,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787710863857"
+    },
+    {
+      "id": "8444411392302",
+      "score": 72.4,
+      "desconto": 52.51,
+      "preco": 66491.01,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444411392302"
+    },
+    {
+      "id": "8787702096842",
+      "score": 72.0,
+      "desconto": 52.18,
+      "preco": 57384.39,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702096842"
+    },
+    {
+      "id": "8444431132373",
+      "score": 71.4,
+      "desconto": 51.66,
+      "preco": 65270.92,
+      "cidade": "JOAO PESSOA",
+      "bairro": "PARATIBE",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444431132373"
+    },
+    {
+      "id": "8787702004093",
+      "score": 70.7,
+      "desconto": 51.11,
+      "preco": 70891.15,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702004093"
+    },
+    {
+      "id": "8444408603780",
+      "score": 70.3,
+      "desconto": 50.82,
+      "preco": 61483.28,
+      "cidade": "JOAO PESSOA",
+      "bairro": "PARATIBE",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444408603780"
+    },
+    {
+      "id": "8787708118040",
+      "score": 68.6,
+      "desconto": 49.45,
+      "preco": 63191.15,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787708118040"
+    },
+    {
+      "id": "8787707298761",
+      "score": 67.1,
+      "desconto": 48.32,
+      "preco": 77526.28,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787707298761"
+    },
+    {
+      "id": "8787715768887",
+      "score": 66.9,
+      "desconto": 48.09,
+      "preco": 64379.82,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787715768887"
+    }
+  ]
 }
