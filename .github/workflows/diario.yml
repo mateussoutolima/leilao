@@ -36,8 +36,13 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Instalar dependências
+      - name: Instalar dependências Python
         run: pip install -r requirements.txt
+
+      - name: Instalar Playwright Chromium (necessário para o Método C anti-Radware)
+        run: |
+          # --with-deps instala as libs de sistema do Chromium no Ubuntu
+          playwright install chromium --with-deps
 
       - name: Montar credenciais do Z-API (a partir dos Secrets)
         env:
@@ -116,7 +121,7 @@ jobs:
       - name: Avisar por e-mail se o CSV não atualizou hoje
         if: steps.download.outputs.fresh != 'true'
         run: |
-          echo "::error title=CSV nao atualizou::A Caixa bloqueou o download hoje (rodei com o ultimo CSV bom). Verifique o Secret SCRAPERAPI_KEY ou ative a Variable SCRAPERAPI_ULTRA=true."
+          echo "::error title=CSV nao atualizou::Todos os metodos de download falharam (A=ScraperAPI+render, B=session warmup, C=Playwright+proxy, D=curl direto). Rodei com o ultimo CSV bom. Verifique o Secret SCRAPERAPI_KEY, a Variable SCRAPERAPI_ULTRA=true e os logs do passo de download."
           exit 1
 
   publicar-painel:

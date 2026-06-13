@@ -1,14 +1,33 @@
 #!/bin/bash
-# Baixa a lista de imóveis PB da Caixa pelo LINK DIRETO e salva em "planilhas leilao"
-# com carimbo de data. Roda no SEU Mac (que tem internet aberta).
+# Baixa a lista de imóveis PB da Caixa e salva em "planilhas leilao" com carimbo de data.
 #
-# A Caixa usa um anti-robô (Radware Bot Manager) que, de vez em quando, devolve uma
-# PÁGINA DE CAPTCHA (HTML ~18 KB) no lugar do CSV. Para lidar com isso, este script:
-#   1) "aquece" uma sessão de navegador (pega cookies na página de download);
-#   2) baixa o CSV mandando headers de navegador (User-Agent, Referer, etc.);
-#   3) tenta de novo (até 4x) se vier CAPTCHA/HTML;
-#   4) VALIDA de verdade: rejeita CAPTCHA/HTML e exige tamanho + conteúdo de CSV real.
-# Se nada válido vier, sai com erro e NÃO salva lixo (o ciclo usa o último CSV bom).
+# ESTRATÉGIA ANTI-RADWARE (4 métodos em cascata):
+#
+# A Caixa protege o endpoint com Radware Bot Manager, que devolve uma página de desafio
+# JavaScript (~18 KB de HTML) no lugar do CSV quando detecta IP de datacenter ou curl puro.
+# O curl direto NUNCA passa em GitHub Actions (IP de datacenter). A cadeia abaixo resolve:
+#
+#  Método A — ScraperAPI + render=true
+#    O ScraperAPI lança um Chromium headless que executa o desafio JS do Radware,
+#    obtém o cookie de validação dentro da mesma sessão e devolve o CSV real.
+#    É a correção principal: sem render=true, o ScraperAPI retornava a página de desafio.
+#
+#  Método B — ScraperAPI + session warmup (mesmo IP para toda a sessão)
+#    Usa session_number para fixar o mesmo IP residencial BR em 3 requisições:
+#    GET origem → GET download-lista.asp → GET CSV.
+#    Fallback sem renderização JS; funciona se Radware confiar no IP após warmup.
+#
+#  Método C — Playwright com ScraperAPI como proxy HTTP residencial
+#    Playwright (browser real, não curl) roda localmente no Actions, mas todo o
+#    tráfego passa pelo proxy ScraperAPI (IP residencial BR). O Chromium executa
+#    o JS do Radware; o ScraperAPI fornece o IP. Mais pesado, mas muito confiável.
+#    Ativado apenas se o pacote playwright estiver instalado.
+#
+#  Método D — curl direto com session warmup (último recurso)
+#    Funciona no Mac do usuário (internet aberta), mas falha no CI. Mantido para
+#    rodar o script localmente sem precisar de SCRAPERAPI_KEY.
+#
+# Se NADA funcionar, sai com erro sem salvar lixo.
 set -uo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -21,27 +40,27 @@ UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, l
 mkdir -p "$DEST"
 TS="$(date +%Y%m%d_%H%M%S)"
 OUT="$DEST/Lista_imoveis_PB_${TS}.csv"
-JAR="$(mktemp -t leilao_cookies.XXXXXX)"
+JAR="$(mktemp /tmp/leilao_cookies.XXXXXX)"
 trap 'rm -f "$JAR"' EXIT
 
 ts(){ date '+%d/%m/%Y %H:%M:%S'; }
 
-# Considera o download válido? (0 = sim). Rejeita CAPTCHA/HTML; exige CSV plausível.
+# Valida se o arquivo é um CSV real da Caixa. Retorna 0 = válido, 1 = inválido.
 is_valid_csv() {
   local f="$1"
   [ -s "$f" ] || return 1
   local sz; sz=$(stat -f%z "$f" 2>/dev/null || stat -c%s "$f" 2>/dev/null || echo 0)
-  # página anti-robô / HTML?
+  # Rejeita página anti-robô / HTML
   if head -c 3000 "$f" | grep -qiE "radware|captcha|bot manager|<html|<head|<!doctype|window\.SSJSInternal"; then
-    echo "  → veio página anti-robô (CAPTCHA), não o CSV."
+    echo "  → veio página anti-robô (CAPTCHA/HTML), não o CSV."
     return 1
   fi
-  # CSV real tem ~300 KB; abaixo de 100 KB é suspeito
+  # CSV real da Caixa tem ~300 KB; abaixo de 100 KB é suspeito
   if [ "${sz:-0}" -lt 100000 ]; then
     echo "  → arquivo pequeno demais (${sz} bytes) para ser a lista completa."
     return 1
   fi
-  # tem cara de CSV da Caixa? (cabeçalhos típicos)
+  # Confere colunas típicas do CSV da Caixa (encoding latin1)
   if ! head -c 6000 "$f" | iconv -f latin1 -t utf-8 2>/dev/null | grep -qiE "endere|bairro|munic|valor|im[oó]vel"; then
     echo "  → conteúdo não parece a lista de imóveis da Caixa."
     return 1
@@ -49,34 +68,110 @@ is_valid_csv() {
   return 0
 }
 
-# --- Tentativa 0: API de scraping com IP residencial (passa pelo Radware) ---
-# Em IP de datacenter (GitHub Actions) o download direto é bloqueado por CAPTCHA.
-# Quando SCRAPERAPI_KEY existe (Secret), roteamos por um IP residencial brasileiro.
-# A ScraperAPI só cobra requisições bem-sucedidas (retorno 200), então falha não gasta.
-# Escape hatch: defina a Variable SCRAPERAPI_ULTRA=true para usar proxies "ultra".
+# ─────────────────────────────────────────────────────────────────────────────
+# MÉTODO A: ScraperAPI + render=true
+# O Radware exige execução de JS para emitir cookie de validação. Sem render=true
+# o ScraperAPI faz um GET simples e recebe a página de desafio no lugar do CSV.
+# Com render=true o ScraperAPI usa Chromium headless → executa o JS → recebe o CSV.
+# ─────────────────────────────────────────────────────────────────────────────
 if [ -n "${SCRAPERAPI_KEY:-}" ]; then
   premium_param="premium=true"
   [ "${SCRAPERAPI_ULTRA:-}" = "true" ] && premium_param="ultra_premium=true"
-  echo "[$(ts)] Tentando via ScraperAPI ($premium_param, country_code=br)…"
-  curl -fsS --connect-timeout 30 --max-time 180 \
+
+  echo "[$(ts)] Método A: ScraperAPI render=true ($premium_param, country_code=br)…"
+  curl -fsS --connect-timeout 30 --max-time 300 \
        -G "https://api.scraperapi.com/" \
        --data-urlencode "api_key=${SCRAPERAPI_KEY}" \
        --data-urlencode "url=${URL}" \
+       --data-urlencode "render=true" \
        --data-urlencode "$premium_param" \
        --data-urlencode "country_code=br" \
        -o "$OUT" 2>/dev/null || true
   if is_valid_csv "$OUT"; then
     SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
-    echo "[$(ts)] OK via ScraperAPI: $OUT (${SZ} bytes)"
+    echo "[$(ts)] ✓ Método A OK: $OUT (${SZ} bytes)"
     exit 0
   fi
-  echo "[$(ts)] ScraperAPI não trouxe CSV válido — caindo para o download direto…"
+  echo "[$(ts)] Método A falhou — tentando Método B…"
+  rm -f "$OUT"
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # MÉTODO B: ScraperAPI + session warmup (sem render, mesmo IP residencial BR)
+  # Usa session_number para fixar o mesmo IP residencial em 3 chamadas consecutivas:
+  # origem → download-lista.asp → CSV. Ajuda quando Radware libera após ver o IP
+  # visitando o site de forma sequencial (sem JS, mas com IP residencial confiável).
+  # ───────────────────────────────────────────────────────────────────────────
+  SESSION_NUM=$(( (RANDOM * RANDOM) % 9000 + 1000 ))
+  echo "[$(ts)] Método B: ScraperAPI session warmup (session=$SESSION_NUM, $premium_param)…"
+
+  # Warmup 1: visita a origem com o mesmo IP residencial
+  curl -fsS --connect-timeout 30 --max-time 60 \
+       -G "https://api.scraperapi.com/" \
+       --data-urlencode "api_key=${SCRAPERAPI_KEY}" \
+       --data-urlencode "url=${ORIGIN}" \
+       --data-urlencode "session_number=${SESSION_NUM}" \
+       --data-urlencode "country_code=br" \
+       -o /dev/null 2>/dev/null || true
+  sleep 2
+
+  # Warmup 2: visita a página de download (coleta cookies e referrer)
+  curl -fsS --connect-timeout 30 --max-time 60 \
+       -G "https://api.scraperapi.com/" \
+       --data-urlencode "api_key=${SCRAPERAPI_KEY}" \
+       --data-urlencode "url=${PAGE}" \
+       --data-urlencode "session_number=${SESSION_NUM}" \
+       --data-urlencode "country_code=br" \
+       -o /dev/null 2>/dev/null || true
+  sleep 2
+
+  # Download: mesmo IP da sessão aquecida
+  curl -fsS --connect-timeout 30 --max-time 180 \
+       -G "https://api.scraperapi.com/" \
+       --data-urlencode "api_key=${SCRAPERAPI_KEY}" \
+       --data-urlencode "url=${URL}" \
+       --data-urlencode "session_number=${SESSION_NUM}" \
+       --data-urlencode "$premium_param" \
+       --data-urlencode "country_code=br" \
+       -o "$OUT" 2>/dev/null || true
+  if is_valid_csv "$OUT"; then
+    SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
+    echo "[$(ts)] ✓ Método B OK: $OUT (${SZ} bytes)"
+    exit 0
+  fi
+  echo "[$(ts)] Método B falhou — tentando Método C…"
   rm -f "$OUT"
 fi
 
-echo "[$(ts)] Baixando $URL"
+# ─────────────────────────────────────────────────────────────────────────────
+# MÉTODO C: Playwright com ScraperAPI como proxy HTTP residencial
+# Playwright lança um Chromium real que executa o JS do Radware. Todo o tráfego
+# passa pelo proxy ScraperAPI (IP residencial BR). Combinação mais confiável:
+# browser real + IP residencial. Requer pacote `playwright` instalado.
+# ─────────────────────────────────────────────────────────────────────────────
+if python3 -c "import playwright" 2>/dev/null; then
+  echo "[$(ts)] Método C: Playwright + ScraperAPI proxy…"
+  if python3 "$(dirname "${BASH_SOURCE[0]}")/baixar_csv_playwright.py" \
+       "$OUT" "${SCRAPERAPI_KEY:-}" "${SCRAPERAPI_ULTRA:-false}" 2>&1; then
+    if is_valid_csv "$OUT"; then
+      SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
+      echo "[$(ts)] ✓ Método C OK: $OUT (${SZ} bytes)"
+      exit 0
+    fi
+  fi
+  echo "[$(ts)] Método C falhou — tentando Método D (curl direto)…"
+  rm -f "$OUT"
+else
+  echo "[$(ts)] Método C ignorado (playwright não instalado) — tentando Método D…"
+fi
 
-# Conjunto de headers de navegador real (Chrome no macOS) — ajuda a passar pelo Radware.
+# ─────────────────────────────────────────────────────────────────────────────
+# MÉTODO D: curl direto com session warmup
+# Funciona no Mac do usuário (IP residencial, internet aberta). Em GitHub Actions
+# (IP de datacenter) quase sempre falha, mas é mantido como último recurso e para
+# uso local sem SCRAPERAPI_KEY.
+# ─────────────────────────────────────────────────────────────────────────────
+echo "[$(ts)] Método D: curl direto (${SCRAPERAPI_KEY:+sem chave disponível, }internet aberta)…"
+
 CH_HEADERS=(
   -H 'sec-ch-ua: "Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"'
   -H 'sec-ch-ua-mobile: ?0'
@@ -87,7 +182,7 @@ CH_HEADERS=(
 
 ATTEMPTS=4
 for n in $(seq 1 $ATTEMPTS); do
-  # 1) aquece a sessão como um navegador: home -> página de download (acumula cookies)
+  # Aquece sessão: origem → download-lista.asp (acumula cookies)
   curl -fsSL -A "$UA" -c "$JAR" -b "$JAR" "${CH_HEADERS[@]}" \
        -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
        -H 'Sec-Fetch-Dest: document' -H 'Sec-Fetch-Mode: navigate' \
@@ -102,7 +197,7 @@ for n in $(seq 1 $ATTEMPTS); do
        --connect-timeout 20 --max-time 60 "$PAGE" -o /dev/null 2>/dev/null || true
   sleep 1
 
-  # 2) baixa o CSV com cara de navegador, usando os cookies da sessão
+  # Baixa o CSV com cookies da sessão aquecida
   curl -fSL --connect-timeout 20 --max-time 120 \
        -A "$UA" -e "$PAGE" -b "$JAR" -c "$JAR" "${CH_HEADERS[@]}" \
        -H "Accept: text/csv,application/octet-stream,application/vnd.ms-excel,*/*" \
@@ -112,15 +207,15 @@ for n in $(seq 1 $ATTEMPTS); do
 
   if is_valid_csv "$OUT"; then
     SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
-    echo "[$(ts)] OK: $OUT (${SZ} bytes) — tentativa $n/$ATTEMPTS"
+    echo "[$(ts)] ✓ Método D OK: $OUT (${SZ} bytes) — tentativa $n/$ATTEMPTS"
     exit 0
   fi
 
-  echo "[$(ts)] tentativa $n/$ATTEMPTS não trouxe um CSV válido."
+  echo "[$(ts)] Método D tentativa $n/$ATTEMPTS falhou."
   rm -f "$OUT"
-  # backoff mais longo: bloqueio anti-robô costuma ser temporário (15s, 30s, 45s)
-  [ "$n" -lt "$ATTEMPTS" ] && sleep $((n*15))
+  [ "$n" -lt "$ATTEMPTS" ] && sleep $((n * 15))
 done
 
-echo "[$(ts)] ERRO: a Caixa não devolveu um CSV válido em $ATTEMPTS tentativas (provável bloqueio anti-robô temporário). Nada foi salvo — o ciclo seguirá com o último CSV bom."
+echo "[$(ts)] ERRO: todos os métodos falharam (A/B/C/D). O Radware bloqueou todas as tentativas."
+echo "[$(ts)] Nada foi salvo — o ciclo seguirá com o último CSV bom."
 exit 1
