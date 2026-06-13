@@ -184,7 +184,7 @@ def parse_csv(src):
         po = stable_offset(rid, 0.004)
         lat = clat + bo[0] + po[0]; lon = clon + bo[1] + po[1]
         records.append({
-            'id': rid, 'uf': uf, 'cidade': cidade, 'bairro': bairro, 'endereco': endereco,
+            'id': rid, 'uf': uf, 'cidade': norm(cidade), 'bairro': norm(bairro), 'endereco': endereco,
             'preco': preco_v, 'avaliacao': aval_v, 'desconto': desc_v,
             'financiamento': financ, 'modalidade': modal,
             'tipo': d['tipo'], 'area_total': d['area_total'], 'area_priv': d['area_priv'],
