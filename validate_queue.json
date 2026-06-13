@@ -1,9 +1,9 @@
 [
  {
   "id": "8444426688911",
-  "query": "RUA DOUTOR AUGUSTO D A FILHO 120 BL C, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA DOUTOR AUGUSTO D A FILHO 120 BL C, Gramame, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
+  "bairro": "Gramame",
   "endereco": "RUA DOUTOR AUGUSTO D A FILHO, N. 120, Apto 404, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426688911",
   "score": 83.2,
@@ -11,9 +11,9 @@
  },
  {
   "id": "8444426352123",
-  "query": "RUA DOUTOR AUGUSTO DE ALMEIDA FILHO 120 BL C, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA DOUTOR AUGUSTO DE ALMEIDA FILHO 120 BL C, Gramame, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
+  "bairro": "Gramame",
   "endereco": "RUA DOUTOR AUGUSTO DE ALMEIDA FILHO, N. 120, Apto 205, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426352123",
   "score": 80.7,
@@ -21,9 +21,9 @@
  },
  {
   "id": "8787713030449",
-  "query": "RUA ROSA MISTICA 158, VALENTINA DE FIGUEIREDO, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA ROSA MISTICA 158, Valentina de Figueiredo, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "VALENTINA DE FIGUEIREDO",
+  "bairro": "Valentina de Figueiredo",
   "endereco": "RUA ROSA MISTICA, N. 158, Apto 101,",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449",
   "score": 77.2,
@@ -31,9 +31,9 @@
  },
  {
   "id": "8787709141126",
-  "query": "RUA INACIO ALBINO NETO 240 3 ANDAR DO TIPO A DO BL 17, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA INACIO ALBINO NETO 240 3 ANDAR DO TIPO A DO BL 17, Gramame, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
+  "bairro": "Gramame",
   "endereco": "RUA INACIO ALBINO NETO, N. 240, Apto 406, 3 ANDAR DO TIPO A DO BL 17",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787709141126",
   "score": 77.2,
@@ -41,9 +41,9 @@
  },
  {
   "id": "8555517993557",
-  "query": "RUA ROMUALDO ROLIM 80 BL E, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA ROMUALDO ROLIM 80 BL E, Gramame, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
+  "bairro": "Gramame",
   "endereco": "RUA ROMUALDO ROLIM, N. 80, Apto 104, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8555517993557",
   "score": 76.0,
@@ -51,9 +51,9 @@
  },
  {
   "id": "8444422881156",
-  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL D, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL D, Gramame, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
+  "bairro": "Gramame",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
   "score": 74.9,
@@ -61,9 +61,9 @@
  },
  {
   "id": "8787704234452",
-  "query": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO 700 BL E, VALENTINA DE FIGUEIREDO, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO 700 BL E, Valentina de Figueiredo, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "VALENTINA DE FIGUEIREDO",
+  "bairro": "Valentina de Figueiredo",
   "endereco": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452",
   "score": 73.1,
@@ -71,9 +71,9 @@
  },
  {
   "id": "8444422950042",
-  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL A, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL A, Gramame, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
+  "bairro": "Gramame",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 101, BL A",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422950042",
   "score": 72.0,
@@ -81,9 +81,9 @@
  },
  {
   "id": "8787702605445",
-  "query": "RUA CAFEZAIS 32 2ï¿½ ANDAR, MUCUMAGRO, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA CAFEZAIS 32 2ï¿½ ANDAR, Muï¿½umagro, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "MUCUMAGRO",
+  "bairro": "Muï¿½umagro",
   "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2ï¿½ ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
   "score": 70.7,
@@ -91,22 +91,12 @@
  },
  {
   "id": "8787711374612",
-  "query": "RUA MARLUCE BELMONT CAVALCANTE 80 LOT 132 BL 3, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA MARLUCE BELMONT CAVALCANTE 80 LOT 132 BL 3, Gramame, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
+  "bairro": "Gramame",
   "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 303, LOT 132 QD 212 BL 3",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711374612",
   "score": 70.7,
   "desconto": 51.11
- },
- {
-  "id": "8787711254200",
-  "query": "RUA MARLUCE BELMONT CAVALCANTE 80 A 3ï¿½ ANDAR BL03, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
-  "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 402A, 3ï¿½ ANDAR, BL03",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711254200",
-  "score": 69.6,
-  "desconto": 50.27
  }
 ]
