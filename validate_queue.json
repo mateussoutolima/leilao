@@ -20,6 +20,16 @@
   "desconto": 59.02
  },
  {
+  "id": "8787713030449",
+  "query": "RUA ROSA MISTICA 158, VALENTINA DE FIGUEIREDO, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "VALENTINA DE FIGUEIREDO",
+  "endereco": "RUA ROSA MISTICA, N. 158, Apto 101,",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449",
+  "score": 77.2,
+  "desconto": 56.28
+ },
+ {
   "id": "8787709141126",
   "query": "RUA INACIO ALBINO NETO 240 3 ANDAR DO TIPO A DO BL 17, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
