@@ -1,11 +1,19 @@
 #!/bin/bash
 # Baixa a lista de imóveis PB da Caixa e salva em "planilhas leilao" com carimbo de data.
 #
-# ESTRATÉGIA ANTI-RADWARE (4 métodos em cascata):
+# ESTRATÉGIA ANTI-RADWARE (5 métodos em cascata):
 #
 # A Caixa protege o endpoint com Radware Bot Manager, que devolve uma página de desafio
 # JavaScript (~18 KB de HTML) no lugar do CSV quando detecta IP de datacenter ou curl puro.
 # O curl direto NUNCA passa em GitHub Actions (IP de datacenter). A cadeia abaixo resolve:
+#
+#  Método 0 — Scrape.do (PRINCIPAL) — substituto do ScraperAPI
+#    Proxy gerenciado com bypass anti-bot embutido. geoCode=br fixa IP residencial
+#    brasileiro (sem custo extra) e super=true usa a rede residencial/móvel.
+#    Cobra créditos SÓ em caso de sucesso (plano grátis: 1.000 créditos/mês).
+#      0a) super=true (residencial, 10 créditos) — tenta primeiro, mais barato
+#      0b) super=true + render=true (25 créditos) — fallback que executa o JS do Radware
+#    Token via env SCRAPEDO_TOKEN (Secret no CI; arquivo local scraper_secrets.sh).
 #
 #  Método A — ScraperAPI + render=true
 #    O ScraperAPI lança um Chromium headless que executa o desafio JS do Radware,
@@ -31,6 +39,11 @@
 set -uo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Em execução LOCAL, carrega as chaves de um arquivo NÃO versionado (ignorado no .gitignore).
+# Em CI (GitHub Actions), as chaves chegam pelo ambiente (Secrets) e este arquivo não existe.
+[ -f "$DIR/scraper_secrets.sh" ] && source "$DIR/scraper_secrets.sh"
+
 DEST="$DIR/planilhas leilao"
 URL="https://venda-imoveis.caixa.gov.br/listaweb/Lista_imoveis_PB.csv"
 PAGE="https://venda-imoveis.caixa.gov.br/sistema/download-lista.asp"
@@ -67,6 +80,46 @@ is_valid_csv() {
   fi
   return 0
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MÉTODO 0: Scrape.do (PRINCIPAL) — residencial BR + bypass anti-bot gerenciado
+# Endpoint: https://api.scrape.do/?token=...&url=...&super=true&geoCode=br[&render=true]
+# - geoCode=br não custa créditos extras (custo definido só por super/render).
+# - Cobra apenas em caso de sucesso (2xx). Tentativas que falham são gratuitas.
+# - Doc de custos: https://scrape.do/documentation/request-costs/
+# Estratégia: tenta primeiro só residencial (10 créditos); se vier a página
+# anti-robô, repete com render=true (25 créditos) para executar o JS do Radware.
+# ─────────────────────────────────────────────────────────────────────────────
+if [ -n "${SCRAPEDO_TOKEN:-}" ]; then
+  # Args base (nunca vazio → seguro com `set -u` no bash 3.2 do macOS).
+  SD_ARGS=(
+    -fsS --connect-timeout 30 --max-time 300
+    -G "https://api.scrape.do/"
+    --data-urlencode "token=${SCRAPEDO_TOKEN}"
+    --data-urlencode "url=${URL}"
+    --data-urlencode "super=true"
+    --data-urlencode "geoCode=br"
+  )
+
+  echo "[$(ts)] Método 0a: Scrape.do residencial BR (super=true, geoCode=br)…"
+  curl "${SD_ARGS[@]}" -o "$OUT" 2>/dev/null || true
+  if is_valid_csv "$OUT"; then
+    SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
+    echo "[$(ts)] ✓ Método 0a OK: $OUT (${SZ} bytes)"
+    exit 0
+  fi
+  rm -f "$OUT"
+
+  echo "[$(ts)] Método 0b: Scrape.do residencial BR + render (executa o JS do Radware)…"
+  curl "${SD_ARGS[@]}" --data-urlencode "render=true" -o "$OUT" 2>/dev/null || true
+  if is_valid_csv "$OUT"; then
+    SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
+    echo "[$(ts)] ✓ Método 0b OK: $OUT (${SZ} bytes)"
+    exit 0
+  fi
+  echo "[$(ts)] Método 0 (Scrape.do) falhou — tentando ScraperAPI / curl direto…"
+  rm -f "$OUT"
+fi
 
 # ─────────────────────────────────────────────────────────────────────────────
 # MÉTODO A: ScraperAPI + render=true

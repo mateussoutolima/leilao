@@ -1,6 +1,7 @@
 # Segredos — NUNCA versionar
 whatsapp_secrets.json
 recipients.secret.json
+scraper_secrets.sh
 
 # macOS / logs / cache
 .DS_Store
