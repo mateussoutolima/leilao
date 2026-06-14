@@ -50,6 +50,15 @@ PAGE="https://venda-imoveis.caixa.gov.br/sistema/download-lista.asp"
 ORIGIN="https://venda-imoveis.caixa.gov.br/"
 UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 
+# Cabeçalhos de navegador reusados pelos métodos baseados em curl (P e D).
+CH_HEADERS=(
+  -H 'sec-ch-ua: "Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"'
+  -H 'sec-ch-ua-mobile: ?0'
+  -H 'sec-ch-ua-platform: "macOS"'
+  -H 'Upgrade-Insecure-Requests: 1'
+  -H 'Accept-Language: pt-BR,pt;q=0.9,en;q=0.8'
+)
+
 mkdir -p "$DEST"
 TS="$(date +%Y%m%d_%H%M%S)"
 OUT="$DEST/Lista_imoveis_PB_${TS}.csv"
@@ -80,6 +89,98 @@ is_valid_csv() {
   fi
   return 0
 }
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MÉTODO Z: Zyte API (PRINCIPAL) — "unlocker" anti-bot gerenciado + geo BR
+# Endpoint: POST https://api.zyte.com/v1/extract  (auth Basic: chave como usuário).
+# Pede httpResponseBody (corpo bruto, base64) com geolocation=BR; a Zyte resolve o
+# desafio do Radware no servidor dela e devolve o CSV. Cobra só em sucesso e tem
+# crédito grátis mensal — barato/grátis para 1 download/dia.
+# Decodifica o base64 com python3 (portável Mac/Linux; evita jq e base64 BSD).
+# ─────────────────────────────────────────────────────────────────────────────
+if [ -n "${ZYTE_API_KEY:-}" ]; then
+  echo "[$(ts)] Método Z: Zyte API (httpResponseBody, geolocation=BR)…"
+  ZRESP="$(mktemp /tmp/zyte_resp.XXXXXX)"
+  for n in 1 2 3; do
+    curl -fsS --connect-timeout 30 --max-time 300 \
+         --user "${ZYTE_API_KEY}:" \
+         --header 'Content-Type: application/json' \
+         --data "{\"url\":\"${URL}\",\"httpResponseBody\":true,\"geolocation\":\"BR\"}" \
+         "https://api.zyte.com/v1/extract" -o "$ZRESP" 2>/dev/null || true
+    # Extrai .httpResponseBody e grava o CSV decodificado em $OUT
+    python3 - "$ZRESP" "$OUT" <<'PY' 2>/dev/null || true
+import json, base64, sys
+try:
+    d = json.load(open(sys.argv[1]))
+    body = d.get("httpResponseBody")
+    if body:
+        with open(sys.argv[2], "wb") as f:
+            f.write(base64.b64decode(body))
+except Exception:
+    pass
+PY
+    if is_valid_csv "$OUT"; then
+      SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
+      echo "[$(ts)] ✓ Método Z OK: $OUT (${SZ} bytes) — tentativa $n"
+      rm -f "$ZRESP"; exit 0
+    fi
+    echo "[$(ts)] Método Z tentativa $n falhou."
+    rm -f "$OUT"; [ "$n" -lt 3 ] && sleep $((n * 5))
+  done
+  rm -f "$ZRESP"
+  echo "[$(ts)] Método Z falhou — tentando próximos métodos…"
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MÉTODO P: proxy residencial brasileiro (pay-as-you-go)  [fallback]
+# Usa BR_PROXY como gateway (-x). Aquece a sessão (origem -> download-lista.asp)
+# e baixa o CSV com os mesmos cookies/IP. Evidência: o Método B do ScraperAPI
+# funcionou só com IP residencial BR + warmup (sem render).
+# Se o warmup com curl não bastar (Radware exigir JS), cai para o Playwright pelo
+# mesmo proxy (Plano B), reusando baixar_csv_playwright.py.
+# ─────────────────────────────────────────────────────────────────────────────
+if [ -n "${BR_PROXY:-}" ]; then
+  echo "[$(ts)] Método P: proxy residencial BR (warmup + download)…"
+  for n in 1 2 3; do
+    # Warmup 1: origem
+    curl -fsSL -x "$BR_PROXY" -A "$UA" -c "$JAR" -b "$JAR" "${CH_HEADERS[@]}" \
+         -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
+         --connect-timeout 30 --max-time 90 "$ORIGIN" -o /dev/null 2>/dev/null || true
+    sleep 1
+    # Warmup 2: página de download (acumula cookies/referrer)
+    curl -fsSL -x "$BR_PROXY" -A "$UA" -c "$JAR" -b "$JAR" "${CH_HEADERS[@]}" \
+         -e "$ORIGIN" -H "Referer: $ORIGIN" \
+         --connect-timeout 30 --max-time 90 "$PAGE" -o /dev/null 2>/dev/null || true
+    sleep 1
+    # Download do CSV com a sessão aquecida
+    curl -fSL -x "$BR_PROXY" -A "$UA" -e "$PAGE" -b "$JAR" -c "$JAR" "${CH_HEADERS[@]}" \
+         -H "Accept: text/csv,application/octet-stream,application/vnd.ms-excel,*/*" \
+         -H "Referer: $PAGE" \
+         --connect-timeout 30 --max-time 120 -o "$OUT" "$URL" 2>/dev/null || true
+    if is_valid_csv "$OUT"; then
+      SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
+      echo "[$(ts)] ✓ Método P OK: $OUT (${SZ} bytes) — tentativa $n"
+      exit 0
+    fi
+    echo "[$(ts)] Método P tentativa $n falhou."
+    rm -f "$OUT"; [ "$n" -lt 3 ] && sleep $((n * 5))
+  done
+
+  # Plano B: Playwright (Chromium real) pelo mesmo proxy residencial BR.
+  # Só roda se o pacote playwright estiver instalado.
+  if python3 -c "import playwright" 2>/dev/null; then
+    echo "[$(ts)] Método P (Plano B): Playwright pelo proxy residencial BR…"
+    if BR_PROXY="$BR_PROXY" python3 "$DIR/baixar_csv_playwright.py" "$OUT" 2>&1; then
+      if is_valid_csv "$OUT"; then
+        SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
+        echo "[$(ts)] ✓ Método P (Playwright) OK: $OUT (${SZ} bytes)"
+        exit 0
+      fi
+    fi
+    rm -f "$OUT"
+  fi
+  echo "[$(ts)] Método P falhou — tentando próximos métodos…"
+fi
 
 # ─────────────────────────────────────────────────────────────────────────────
 # MÉTODO 0: Scrape.do (PRINCIPAL) — residencial BR + bypass anti-bot gerenciado
@@ -224,14 +325,6 @@ fi
 # uso local sem SCRAPERAPI_KEY.
 # ─────────────────────────────────────────────────────────────────────────────
 echo "[$(ts)] Método D: curl direto (${SCRAPERAPI_KEY:+sem chave disponível, }internet aberta)…"
-
-CH_HEADERS=(
-  -H 'sec-ch-ua: "Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"'
-  -H 'sec-ch-ua-mobile: ?0'
-  -H 'sec-ch-ua-platform: "macOS"'
-  -H 'Upgrade-Insecure-Requests: 1'
-  -H 'Accept-Language: pt-BR,pt;q=0.9,en;q=0.8'
-)
 
 ATTEMPTS=4
 for n in $(seq 1 $ATTEMPTS); do

@@ -18,6 +18,7 @@ Retorna 0 se o CSV foi salvo com sucesso, 1 caso contrário.
 import sys
 import os
 import time
+from urllib.parse import urlparse
 
 
 CSV_URL  = "https://venda-imoveis.caixa.gov.br/listaweb/Lista_imoveis_PB.csv"
@@ -53,7 +54,27 @@ def is_valid_csv(data: bytes) -> tuple[bool, str]:
 
 
 def build_proxy(api_key: str, ultra: bool) -> dict | None:
-    """Monta a config de proxy para o Playwright usar o ScraperAPI como gateway."""
+    """Monta a config de proxy para o Playwright.
+
+    Prioridade:
+      1) BR_PROXY (proxy residencial BR genérico, formato http://user:pass@host:port)
+      2) ScraperAPI como gateway (legado)
+    """
+    # 1) Proxy residencial BR genérico (Método P / Plano B).
+    br_proxy = os.environ.get("BR_PROXY", "").strip()
+    if br_proxy:
+        u = urlparse(br_proxy)
+        scheme = u.scheme or "http"
+        server = f"{scheme}://{u.hostname}"
+        if u.port:
+            server += f":{u.port}"
+        return {
+            "server":   server,
+            "username": u.username or "",
+            "password": u.password or "",
+        }
+
+    # 2) ScraperAPI (legado).
     if not api_key:
         return None
     # O ScraperAPI suporta parâmetros extras no username:
