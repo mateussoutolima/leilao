@@ -39,11 +39,6 @@ jobs:
       - name: Instalar dependências Python
         run: pip install -r requirements.txt
 
-      - name: Instalar Playwright Chromium (necessário para o Método C anti-Radware)
-        run: |
-          # --with-deps instala as libs de sistema do Chromium no Ubuntu
-          playwright install chromium --with-deps
-
       - name: Montar credenciais do Z-API (a partir dos Secrets)
         env:
           ZAPI_INSTANCE_ID: ${{ secrets.ZAPI_INSTANCE_ID }}
@@ -63,10 +58,6 @@ jobs:
         id: download
         env:
           ZYTE_API_KEY: ${{ secrets.ZYTE_API_KEY }}
-          BR_PROXY: ${{ secrets.BR_PROXY }}
-          SCRAPEDO_TOKEN: ${{ secrets.SCRAPEDO_TOKEN }}
-          SCRAPERAPI_KEY: ${{ secrets.SCRAPERAPI_KEY }}
-          SCRAPERAPI_ULTRA: ${{ vars.SCRAPERAPI_ULTRA }}
         run: |
           # Não derruba o job se falhar: registramos 'fresh' e seguimos com o último CSV bom.
           if bash baixar_csv.sh; then
@@ -124,7 +115,7 @@ jobs:
       - name: Avisar por e-mail se o CSV não atualizou hoje
         if: steps.download.outputs.fresh != 'true'
         run: |
-          echo "::error title=CSV nao atualizou::Todos os metodos de download falharam (Z=Zyte API, P=proxy residencial BR, 0=Scrape.do, A=ScraperAPI+render, B=session warmup, C=Playwright+proxy, D=curl direto). Rodei com o ultimo CSV bom. Verifique o Secret ZYTE_API_KEY (e/ou BR_PROXY/SCRAPEDO_TOKEN/SCRAPERAPI_KEY) e os logs do passo de download."
+          echo "::error title=CSV nao atualizou::Os metodos de download falharam (Z=Zyte API, D=curl direto). Rodei com o ultimo CSV bom. Verifique o Secret ZYTE_API_KEY, o saldo de creditos da Zyte e os logs do passo de download."
           exit 1
 
   publicar-painel:
