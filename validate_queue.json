@@ -6,7 +6,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA DOUTOR AUGUSTO D A FILHO, N. 120, Apto 404, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426688911",
-  "score": 83.2,
+  "score": 88.9,
   "desconto": 61.02
  },
  {
@@ -16,18 +16,8 @@
   "bairro": "GRAMAME",
   "endereco": "RUA DOUTOR AUGUSTO DE ALMEIDA FILHO, N. 120, Apto 205, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426352123",
-  "score": 80.7,
+  "score": 86.4,
   "desconto": 59.02
- },
- {
-  "id": "8787713030449",
-  "query": "RUA ROSA MISTICA 158, VALENTINA DE FIGUEIREDO, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "VALENTINA DE FIGUEIREDO",
-  "endereco": "RUA ROSA MISTICA, N. 158, Apto 101,",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449",
-  "score": 77.2,
-  "desconto": 56.28
  },
  {
   "id": "8787709141126",
@@ -36,7 +26,17 @@
   "bairro": "GRAMAME",
   "endereco": "RUA INACIO ALBINO NETO, N. 240, Apto 406, 3 ANDAR DO TIPO A DO BL 17",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787709141126",
-  "score": 77.2,
+  "score": 82.7,
+  "desconto": 56.28
+ },
+ {
+  "id": "8787713030449",
+  "query": "RUA ROSA MISTICA 158, VALENTINA DE FIGUEIREDO, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "VALENTINA DE FIGUEIREDO",
+  "endereco": "RUA ROSA MISTICA, N. 158, Apto 101,",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449",
+  "score": 82.1,
   "desconto": 56.28
  },
  {
@@ -46,18 +46,8 @@
   "bairro": "GRAMAME",
   "endereco": "RUA ROMUALDO ROLIM, N. 80, Apto 104, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8555517993557",
-  "score": 76.0,
+  "score": 81.8,
   "desconto": 55.31
- },
- {
-  "id": "8444422881156",
-  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL D, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
-  "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
-  "score": 74.9,
-  "desconto": 54.48
  },
  {
   "id": "8787704234452",
@@ -66,8 +56,18 @@
   "bairro": "VALENTINA DE FIGUEIREDO",
   "endereco": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452",
-  "score": 73.1,
+  "score": 78.0,
   "desconto": 53.04
+ },
+ {
+  "id": "8444422881156",
+  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL D, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "GRAMAME",
+  "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
+  "score": 77.0,
+  "desconto": 54.48
  },
  {
   "id": "8444422950042",
@@ -76,17 +76,17 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 101, BL A",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422950042",
-  "score": 72.0,
+  "score": 76.4,
   "desconto": 52.18
  },
  {
   "id": "8787702605445",
-  "query": "RUA CAFEZAIS 32 2ï¿½ ANDAR, MUI¿½UMAGRO, JOAO PESSOA, Paraiba, Brasil",
+  "query": "RUA CAFEZAIS 32 2º ANDAR, MUCUMAGRO, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
-  "bairro": "MUI¿½UMAGRO",
-  "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2ï¿½ ANDAR",
+  "bairro": "MUCUMAGRO",
+  "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2º ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
-  "score": 70.7,
+  "score": 73.8,
   "desconto": 51.11
  }
 ]
