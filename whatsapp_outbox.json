@@ -1,30 +1,5 @@
 {
- "date": "2026-06-13",
- "generatedAt": "2026-06-13T14:54:36.588301",
- "messages": [
-  {
-   "key": "2026-06-13:a1780663816187:+5548999001155:98669157",
-   "to": "+5548999001155",
-   "body": "🏠 *Imoveis Joao Pessoa* — 8 nova(s) oportunidade(s)\nLeilão Caixa · Paraíba\n\n• 56% off · R$ 53.340 · Apartamento — JOAO PESSOA/VALENTINA DE FIGUEIREDO · score 77.2\n  📍 RUA ROSA MISTICA, N. 158, Apto 101,\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449\n• 56% off · R$ 56.140 · Apartamento — JOAO PESSOA/GRAMAME · score 76.6\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 406, BL 11\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787701106364\n• 53% off · R$ 64.815 · Apartamento — JOAO PESSOA/VALENTINA DE FIGUEIREDO · score 73.1\n  📍 RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452\n• 53% off · R$ 64.345 · Apartamento — JOAO PESSOA/GRAMAME · score 73.1\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 103, BL 19\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787710863857\n• 53% off · R$ 66.491 · Apartamento — JOAO PESSOA/GRAMAME · score 72.4\n  📍 RUA COMERCIANTE ALVARO ANTERO NASCIMENTO, N. 1491, Apto 302,\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444411392302\n• 52% off · R$ 57.384 · Apartamento — JOAO PESSOA/GRAMAME · score 72.0\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 306, BLOCO 14\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702096842\n• 52% off · R$ 65.271 · Apartamento — JOAO PESSOA/PARATIBE · score 71.4\n  📍 RUA FRANCISCO DE ASSIS DIAS, N. 80, Apto 403, BL F\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444431132373\n• 51% off · R$ 61.483 · Apartamento — JOAO PESSOA/PARATIBE · score 70.3\n  📍 RUA JEQUITIBA ROSA, N. 161, Apto 202, BL B\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444408603780",
-   "alarmId": "a1780663816187",
-   "alarmName": "Imoveis Joao Pessoa",
-   "newCount": 8
-  },
-  {
-   "key": "2026-06-13:a1780663816187:+5548996731606:98669157",
-   "to": "+5548996731606",
-   "body": "🏠 *Imoveis Joao Pessoa* — 8 nova(s) oportunidade(s)\nLeilão Caixa · Paraíba\n\n• 56% off · R$ 53.340 · Apartamento — JOAO PESSOA/VALENTINA DE FIGUEIREDO · score 77.2\n  📍 RUA ROSA MISTICA, N. 158, Apto 101,\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449\n• 56% off · R$ 56.140 · Apartamento — JOAO PESSOA/GRAMAME · score 76.6\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 406, BL 11\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787701106364\n• 53% off · R$ 64.815 · Apartamento — JOAO PESSOA/VALENTINA DE FIGUEIREDO · score 73.1\n  📍 RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452\n• 53% off · R$ 64.345 · Apartamento — JOAO PESSOA/GRAMAME · score 73.1\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 103, BL 19\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787710863857\n• 53% off · R$ 66.491 · Apartamento — JOAO PESSOA/GRAMAME · score 72.4\n  📍 RUA COMERCIANTE ALVARO ANTERO NASCIMENTO, N. 1491, Apto 302,\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444411392302\n• 52% off · R$ 57.384 · Apartamento — JOAO PESSOA/GRAMAME · score 72.0\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 306, BLOCO 14\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702096842\n• 52% off · R$ 65.271 · Apartamento — JOAO PESSOA/PARATIBE · score 71.4\n  📍 RUA FRANCISCO DE ASSIS DIAS, N. 80, Apto 403, BL F\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444431132373\n• 51% off · R$ 61.483 · Apartamento — JOAO PESSOA/PARATIBE · score 70.3\n  📍 RUA JEQUITIBA ROSA, N. 161, Apto 202, BL B\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444408603780",
-   "alarmId": "a1780663816187",
-   "alarmName": "Imoveis Joao Pessoa",
-   "newCount": 8
-  },
-  {
-   "key": "2026-06-13:a1780663816187:120363404074701921-group:98669157",
-   "to": "120363404074701921-group",
-   "body": "🏠 *Imoveis Joao Pessoa* — 8 nova(s) oportunidade(s)\nLeilão Caixa · Paraíba\n\n• 56% off · R$ 53.340 · Apartamento — JOAO PESSOA/VALENTINA DE FIGUEIREDO · score 77.2\n  📍 RUA ROSA MISTICA, N. 158, Apto 101,\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787713030449\n• 56% off · R$ 56.140 · Apartamento — JOAO PESSOA/GRAMAME · score 76.6\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 406, BL 11\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787701106364\n• 53% off · R$ 64.815 · Apartamento — JOAO PESSOA/VALENTINA DE FIGUEIREDO · score 73.1\n  📍 RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452\n• 53% off · R$ 64.345 · Apartamento — JOAO PESSOA/GRAMAME · score 73.1\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 103, BL 19\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787710863857\n• 53% off · R$ 66.491 · Apartamento — JOAO PESSOA/GRAMAME · score 72.4\n  📍 RUA COMERCIANTE ALVARO ANTERO NASCIMENTO, N. 1491, Apto 302,\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444411392302\n• 52% off · R$ 57.384 · Apartamento — JOAO PESSOA/GRAMAME · score 72.0\n  📍 RUA INACIO ALBINO NETO, N. 240, Apto 306, BLOCO 14\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702096842\n• 52% off · R$ 65.271 · Apartamento — JOAO PESSOA/PARATIBE · score 71.4\n  📍 RUA FRANCISCO DE ASSIS DIAS, N. 80, Apto 403, BL F\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444431132373\n• 51% off · R$ 61.483 · Apartamento — JOAO PESSOA/PARATIBE · score 70.3\n  📍 RUA JEQUITIBA ROSA, N. 161, Apto 202, BL B\n  https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444408603780",
-   "alarmId": "a1780663816187",
-   "alarmName": "Imoveis Joao Pessoa",
-   "newCount": 8
-  }
- ]
+ "date": "2026-06-14",
+ "generatedAt": "2026-06-14T11:51:30.976600",
+ "messages": []
 }
