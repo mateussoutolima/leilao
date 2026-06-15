@@ -2,9 +2,11 @@ name: Leilão PB — rotina diária
 
 on:
   schedule:
-    # 10:00 UTC = 07:00 horário de Brasília (BRT, UTC-3).
-    # O GitHub pode atrasar alguns minutos em horário de pico — é normal.
-    - cron: "0 10 * * *"
+    # Minuto "quebrado" (não no topo da hora) para reduzir a chance de o GitHub
+    # descartar o agendamento — o cron do Actions costuma atrasar/derrubar runs
+    # marcadas em :00. Dois horários: o 2º é backup caso o 1º não dispare.
+    - cron: "17 10 * * *"   # ~07:17 BRT (horário principal)
+    - cron: "23 13 * * *"   # ~10:23 BRT (backup do mesmo dia; rotina é idempotente)
   workflow_dispatch: {}   # botão "Run workflow" para rodar na hora
 
 # Evita duas execuções simultâneas (ex.: cron + clique manual)
