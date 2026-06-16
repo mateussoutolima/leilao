@@ -6,18 +6,8 @@
   "bairro": "GRAMAME",
   "endereco": "RUA DOUTOR AUGUSTO D A FILHO, N. 120, Apto 404, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426688911",
-  "score": 88.9,
+  "score": 88.8,
   "desconto": 61.02
- },
- {
-  "id": "8444426352123",
-  "query": "RUA DOUTOR AUGUSTO DE ALMEIDA FILHO 120 BL C, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
-  "endereco": "RUA DOUTOR AUGUSTO DE ALMEIDA FILHO, N. 120, Apto 205, BL C",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426352123",
-  "score": 86.4,
-  "desconto": 59.02
  },
  {
   "id": "8787709141126",
@@ -26,8 +16,8 @@
   "bairro": "GRAMAME",
   "endereco": "RUA INACIO ALBINO NETO, N. 240, Apto 406, 3 ANDAR DO TIPO A DO BL 17",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787709141126",
-  "score": 82.7,
-  "desconto": 56.28
+  "score": 86.3,
+  "desconto": 59.02
  },
  {
   "id": "8787713030449",
