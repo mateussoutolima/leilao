@@ -30,6 +30,7 @@ QUEUE     = os.path.join(HERE, 'validate_queue.json')
 DASHBOARD = os.path.join(HERE, 'dashboard_leilao.html')
 SUMMARY   = os.path.join(HERE, 'last_summary.json')
 OUTBOX    = os.path.join(HERE, 'whatsapp_outbox.json')
+SHORTLINKS = os.path.join(HERE, 'shortlinks.json')       # cache de links encurtados (TinyURL)
 DLSTATUS  = os.path.join(HERE, 'download_status.json')   # status do download (escrito por baixar_csv.sh)
 RECIPIENTS_FILE = os.path.join(HERE, 'recipients.secret.json')  # destinatários locais (não versionado)
 PLANILHAS = os.path.join(HERE, 'planilhas leilao')   # CSVs vivem aqui, p/ não bagunçar o repo
@@ -377,10 +378,47 @@ def _fmt_kb(n):
     except Exception:
         return "—"
 
-def build_status_message(s, dl):
+def _titlecase(s):
+    return ' '.join(w.capitalize() for w in str(s).split())
+
+def format_alarm_filters(alarms):
+    """Resumo legível dos parâmetros de cada alarme habilitado, para entrar na
+    mensagem de status (você vê na hora o que está sendo filtrado)."""
+    out = []
+    for a in (alarms or []):
+        if not a.get('enabled'):
+            continue
+        out.append(f"🎯 Filtros — \"{a.get('name') or 'Alarme'}\":")
+        if a.get('tipos'):
+            out.append("   tipo: " + ", ".join(a['tipos']))
+        if a.get('cidades'):
+            out.append("   cidade: " + ", ".join(_titlecase(c) for c in a['cidades']))
+        if a.get('bairros'):
+            out.append("   bairros: " + ", ".join(_titlecase(b) for b in a['bairros']))
+        crit = []
+        if a.get('descMin'):
+            crit.append(f"desc ≥ {a['descMin']}%")
+        if a.get('precoMax') is not None:
+            crit.append(f"preço ≤ {fmt_brl(a['precoMax'])}")
+        if a.get('ppm2Max') is not None:
+            crit.append(f"R$/m² ≤ {fmt_brl(a['ppm2Max'])}")
+        if a.get('quartosMin'):
+            crit.append(f"quartos ≥ {a['quartosMin']}")
+        if a.get('scoreMin'):
+            crit.append(f"score ≥ {a['scoreMin']}")
+        if a.get('financ'):
+            crit.append("aceita financiamento" if str(a['financ']).lower().startswith('s') else "sem financiamento")
+        if a.get('area'):
+            crit.append("dentro da área desenhada")
+        if crit:
+            out.append("   " + " · ".join(crit))
+    return out
+
+def build_status_message(s, dl, alarms=None):
     """Mensagem de status (heartbeat): confirma que o run aconteceu, COMO o CSV foi
-    baixado (método/arquivo/tamanho) e o que o alarme achou — inclusive quando o
-    resultado é 'nada novo'. É o que dá a você a visão clara via WhatsApp."""
+    baixado (método/arquivo/tamanho), o que o alarme achou — inclusive quando o
+    resultado é 'nada novo' — e QUAIS são os parâmetros do alarme. É o que dá a você
+    a visão clara via WhatsApp."""
     run = s.get('lastRun') or ''
     L = [f"🤖 *Leilão PB — status do run* · {run}"]
     if dl and dl.get('ok') and dl.get('fresh'):
@@ -410,6 +448,10 @@ def build_status_message(s, dl):
         pct = z.get('successPct')
         pcts = f"{pct}% ok" if pct is not None else "—"
         L.append(f"💳 Zyte (7d): {z.get('reqs7d')} req · {pcts} · ~US$ {z.get('costUsd7d')}")
+    flt = format_alarm_filters(alarms)
+    if flt:
+        L.append("")
+        L.extend(flt)
     return "\n".join(L)
 
 def status_signature(s, dl):
@@ -431,7 +473,7 @@ def add_status_messages(outbox, s, dl, alarms):
     quando o quadro muda."""
     today = outbox.get('date')
     sig = status_signature(s, dl)
-    body = build_status_message(s, dl)
+    body = build_status_message(s, dl, alarms)
     recips = []
     for a in alarms:
         if not a.get('enabled'):
