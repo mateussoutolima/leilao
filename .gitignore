@@ -12,3 +12,6 @@ rodar_diario.log
 
 # cookies temporários do download
 leilao_cookies.*
+
+# backups locais (contêm telefones — nunca versionar)
+*.bak_*
