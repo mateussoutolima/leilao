@@ -1,1 +1,14 @@
-{"ok": true, "fresh": true, "method": "Z", "csv": "Lista_imoveis_PB_20260616_181306.csv", "bytes": 310616, "ts": "16/06/2026 18:13:08"}
+{
+ "ok": true,
+ "fresh": true,
+ "method": "Z",
+ "csv": "Lista_imoveis_PB_20260617_000240.csv",
+ "bytes": 310616,
+ "ts": "17/06/2026 00:02:42",
+ "zyte": {
+  "reqs7d": 7,
+  "ok7d": 6,
+  "successPct": 86,
+  "costUsd7d": 0.0042
+ }
+}
