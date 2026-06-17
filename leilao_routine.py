@@ -30,6 +30,8 @@ QUEUE     = os.path.join(HERE, 'validate_queue.json')
 DASHBOARD = os.path.join(HERE, 'dashboard_leilao.html')
 SUMMARY   = os.path.join(HERE, 'last_summary.json')
 OUTBOX    = os.path.join(HERE, 'whatsapp_outbox.json')
+DLSTATUS  = os.path.join(HERE, 'download_status.json')   # status do download (escrito por baixar_csv.sh)
+RECIPIENTS_FILE = os.path.join(HERE, 'recipients.secret.json')  # destinatários locais (não versionado)
 PLANILHAS = os.path.join(HERE, 'planilhas leilao')   # CSVs vivem aqui, p/ não bagunçar o repo
 
 # ----------------------------- helpers -----------------------------
@@ -301,6 +303,16 @@ def recipients_from_env():
     Vazio => sem override (uso local pode manter recipients no estado privado)."""
     raw = (os.environ.get('LEILAO_RECIPIENTS') or '').strip()
     if not raw:
+        # Fallback LOCAL: arquivo não versionado recipients.secret.json no mesmo
+        # formato {"<alarmId>": ["+55...", "grupo-id"]}. Em CI esse arquivo não
+        # existe e os destinatários vêm do Secret LEILAO_RECIPIENTS acima.
+        if os.path.exists(RECIPIENTS_FILE):
+            try:
+                with open(RECIPIENTS_FILE, encoding='utf-8') as f:
+                    m = json.load(f)
+                return m if isinstance(m, dict) else {}
+            except Exception:
+                sys.stderr.write("recipients.secret.json inválido — ignorando.\n")
         return {}
     try:
         m = json.loads(raw)
@@ -347,6 +359,93 @@ def build_outbox(records, alarms, seen):
             })
     return {'date': today, 'generatedAt': datetime.datetime.now().isoformat(),
             'messages': messages}
+
+# ----------------------------- heartbeat (status do run) -----------------------------
+def load_download_status():
+    """Lê download_status.json (escrito por baixar_csv.sh). None se não existir."""
+    if os.path.exists(DLSTATUS):
+        try:
+            with open(DLSTATUS, encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return None
+
+def _fmt_kb(n):
+    try:
+        return f"{round(int(n) / 1024)} KB"
+    except Exception:
+        return "—"
+
+def build_status_message(s, dl):
+    """Mensagem de status (heartbeat): confirma que o run aconteceu, COMO o CSV foi
+    baixado (método/arquivo/tamanho) e o que o alarme achou — inclusive quando o
+    resultado é 'nada novo'. É o que dá a você a visão clara via WhatsApp."""
+    run = s.get('lastRun') or ''
+    L = [f"🤖 *Leilão PB — status do run* · {run}"]
+    if dl and dl.get('ok') and dl.get('fresh'):
+        metodo = {'Z': 'Zyte (Método Z)', 'D': 'curl direto (Método D)'}.get(
+            dl.get('method'), str(dl.get('method')))
+        L.append("✅ Rodou e baixou planilha NOVA")
+        L.append(f"📥 via {metodo}")
+        L.append(f"   {dl.get('csv')} · {_fmt_kb(dl.get('bytes'))}")
+    elif dl is not None and not dl.get('fresh'):
+        L.append("⚠️ Rodou, mas NÃO baixou planilha nova hoje")
+        L.append(f"📥 download falhou (Zyte + curl direto) — usei o último CSV bom:")
+        L.append(f"   {s.get('csv')}")
+        L.append("   ⚠️ confira o saldo da Zyte e os logs do GitHub Actions")
+    else:
+        L.append("✅ Rodou")
+        L.append(f"📥 CSV usado: {s.get('csv')}")
+    L.append(f"🏙️ João Pessoa: {s.get('total')} imóveis · {s.get('new')} novo(s) desde a baseline")
+    mn = s.get('matchedNew') or 0
+    m = s.get('matched') or 0
+    if mn > 0:
+        L.append(f"🔔 Alarme: {m} no filtro · {mn} NOVO(S) → alerta enviado ✅")
+    else:
+        L.append(f"🔔 Alarme: {m} no filtro · 0 novos → nada a avisar 👍")
+    # Uso da Zyte (7 dias) — só aparece se baixar_csv.sh conseguiu consultar a Stats API.
+    z = (dl or {}).get('zyte') if isinstance(dl, dict) else None
+    if z:
+        pct = z.get('successPct')
+        pcts = f"{pct}% ok" if pct is not None else "—"
+        L.append(f"💳 Zyte (7d): {z.get('reqs7d')} req · {pcts} · ~US$ {z.get('costUsd7d')}")
+    return "\n".join(L)
+
+def status_signature(s, dl):
+    """Assinatura ESTÁVEL do quadro do run (sem timestamp nem nome do CSV), para o
+    heartbeat sair 1x/dia e só repetir se algo mudar (download falhou↔ok, ou surgiu
+    imóvel novo no alarme). Reruns idênticos no mesmo dia geram a mesma chave e o
+    sender (idempotente) não reenvia."""
+    sig = {
+        'ok': bool(dl and dl.get('ok')),
+        'fresh': bool(dl and dl.get('fresh')),
+        'method': (dl or {}).get('method'),
+        'matchedNew': s.get('matchedNew') or 0,
+    }
+    return hashlib.md5(json.dumps(sig, sort_keys=True).encode('utf-8')).hexdigest()[:8]
+
+def add_status_messages(outbox, s, dl, alarms):
+    """Acrescenta a mensagem de status ao outbox, para os MESMOS destinatários dos
+    alarmes habilitados. Chave = data + assinatura do quadro ⇒ 1x/dia, reenvia só
+    quando o quadro muda."""
+    today = outbox.get('date')
+    sig = status_signature(s, dl)
+    body = build_status_message(s, dl)
+    recips = []
+    for a in alarms:
+        if not a.get('enabled'):
+            continue
+        for x in (a.get('recipients') or []):
+            x = str(x).strip()
+            if x and x not in recips:
+                recips.append(x)
+    for to in recips:
+        outbox['messages'].append({
+            'key': f"{today}:status:{to}:{sig}", 'to': to, 'body': body,
+            'alarmId': 'status', 'alarmName': 'Status do run', 'newCount': 0,
+        })
+    return outbox
 
 # ----------------------------- state -----------------------------
 def load_state():
@@ -448,8 +547,17 @@ def build(write_queue=False):
     if write_queue:
         with open(QUEUE, 'w', encoding='utf-8') as f:
             json.dump(queue, f, ensure_ascii=False, indent=1)
-    # WhatsApp outbox: ready-to-send messages for the native sender (Twilio)
-    outbox = build_outbox(records, alarms_with_recipients(alarms), seen)
+    # WhatsApp outbox: mensagens prontas para o sender nativo.
+    # Inclui (a) alertas de imóveis novos por alarme e (b) o HEARTBEAT de status do
+    # run (sempre presente, mesmo sem novidade — é a confirmação de que rodou).
+    alarms_r = alarms_with_recipients(alarms)
+    dl = load_download_status()
+    outbox = build_outbox(records, alarms_r, seen)
+    status_summary = {
+        'lastRun': now, 'csv': os.path.basename(src), 'total': len(records),
+        'new': len(new_ids), 'matched': len(matched), 'matchedNew': len(matched_new),
+    }
+    add_status_messages(outbox, status_summary, dl, alarms_r)
     with open(OUTBOX, 'w', encoding='utf-8') as f:
         json.dump(outbox, f, ensure_ascii=False, indent=1)
     render_dashboard(records, meta)

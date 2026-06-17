@@ -60,6 +60,8 @@ jobs:
         id: download
         env:
           ZYTE_API_KEY: ${{ secrets.ZYTE_API_KEY }}
+          ZYTE_STATS_KEY: ${{ secrets.ZYTE_STATS_KEY }}   # opcional — uso/saldo no heartbeat
+          ZYTE_ORG_ID: ${{ secrets.ZYTE_ORG_ID }}         # opcional
         run: |
           # Não derruba o job se falhar: registramos 'fresh' e seguimos com o último CSV bom.
           if bash baixar_csv.sh; then
@@ -92,7 +94,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add leilao_state.json imoveis.json dashboard_leilao.html \
                   validate_queue.json last_summary.json whatsapp_outbox.json \
-                  whatsapp_sent.json "planilhas leilao" 2>/dev/null || true
+                  whatsapp_sent.json download_status.json "planilhas leilao" 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Nada mudou — nada a commitar."
           else

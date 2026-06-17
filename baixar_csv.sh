@@ -46,8 +46,61 @@ TS="$(date +%Y%m%d_%H%M%S)"
 OUT="$DEST/Lista_imoveis_PB_${TS}.csv"
 JAR="$(mktemp /tmp/leilao_cookies.XXXXXX)"
 trap 'rm -f "$JAR"' EXIT
+STATUS="$DIR/download_status.json"
 
 ts(){ date '+%d/%m/%Y %H:%M:%S'; }
+
+# Consulta a Stats API da Zyte (uso dos últimos 7 dias) e mescla um campo "zyte" no
+# download_status.json. OPCIONAL: só roda se ZYTE_STATS_KEY (a *dashboard API key*,
+# diferente da ZYTE_API_KEY) e ZYTE_ORG_ID estiverem definidas. Best-effort: nunca
+# derruba o script. A Zyte NÃO tem endpoint de "saldo restante" — isso mostra
+# requisições, % de sucesso e gasto (US$), o suficiente p/ perceber se algo deu errado.
+query_zyte_stats(){
+  [ -n "${ZYTE_STATS_KEY:-}" ] && [ -n "${ZYTE_ORG_ID:-}" ] || return 0
+  local resp; resp="$(mktemp /tmp/zyte_stats.XXXXXX)"
+  curl -fsS --connect-timeout 15 --max-time 40 --compressed \
+       --user "${ZYTE_STATS_KEY}:" \
+       "https://zyte-api-stats.zyte.com/api/stats?organization_id=${ZYTE_ORG_ID}" \
+       -o "$resp" 2>/dev/null || { rm -f "$resp"; return 0; }
+  python3 - "$STATUS" "$resp" <<'PY' 2>/dev/null || true
+import json, sys
+status_path, resp_path = sys.argv[1], sys.argv[2]
+try:
+    d = json.load(open(resp_path)); rows = d.get("results") or []
+    reqs = sum(int(r.get("request_count") or 0) for r in rows)
+    ok = 0; cost = 0.0
+    for r in rows:
+        cost += float(r.get("cost_microusd_total") or 0)
+        for sc in (r.get("status_codes") or []):
+            if sc.get("code") == 200: ok += int(sc.get("count") or 0)
+    st = json.load(open(status_path))
+    st["zyte"] = {"reqs7d": reqs, "ok7d": ok,
+                  "successPct": round(100.0 * ok / reqs) if reqs else None,
+                  "costUsd7d": round(cost / 1e6, 4)}
+    json.dump(st, open(status_path, "w"), ensure_ascii=False, indent=1)
+except Exception:
+    pass
+PY
+  rm -f "$resp"
+}
+
+# Grava download_status.json (lido pelo leilao_routine.py p/ o heartbeat de WhatsApp).
+# Uso: write_status <ok 0|1> <fresh 0|1> <method Z|D|-> <csv|-> <bytes>
+write_status(){
+  python3 - "$STATUS" "$1" "$2" "$3" "$4" "$5" <<'PY' 2>/dev/null || true
+import json, sys, datetime
+path, ok, fresh, method, csv, nbytes = sys.argv[1:7]
+json.dump({
+    "ok": ok == "1",
+    "fresh": fresh == "1",
+    "method": None if method == "-" else method,
+    "csv": None if csv == "-" else csv,
+    "bytes": int(nbytes) if str(nbytes).isdigit() else 0,
+    "ts": datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+}, open(path, "w"), ensure_ascii=False, indent=1)
+PY
+  query_zyte_stats   # enriquece com uso da Zyte (opcional, best-effort)
+}
 
 # Valida se o arquivo é um CSV real da Caixa. Retorna 0 = válido, 1 = inválido.
 is_valid_csv() {
@@ -104,6 +157,7 @@ PY
     if is_valid_csv "$OUT"; then
       SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
       echo "[$(ts)] ✓ Método Z OK: $OUT (${SZ} bytes) — tentativa $n"
+      write_status 1 1 Z "$(basename "$OUT")" "$SZ"
       rm -f "$ZRESP"; exit 0
     fi
     echo "[$(ts)] Método Z tentativa $n falhou."
@@ -149,6 +203,7 @@ for n in $(seq 1 $ATTEMPTS); do
   if is_valid_csv "$OUT"; then
     SZ=$(stat -f%z "$OUT" 2>/dev/null || stat -c%s "$OUT" 2>/dev/null || echo 0)
     echo "[$(ts)] ✓ Método D OK: $OUT (${SZ} bytes) — tentativa $n/$ATTEMPTS"
+    write_status 1 1 D "$(basename "$OUT")" "$SZ"
     exit 0
   fi
 
@@ -159,4 +214,5 @@ done
 
 echo "[$(ts)] ERRO: todos os métodos falharam (Z/D). O Radware bloqueou todas as tentativas."
 echo "[$(ts)] Nada foi salvo — o ciclo seguirá com o último CSV bom."
+write_status 0 0 - - 0
 exit 1

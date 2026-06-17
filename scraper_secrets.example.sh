@@ -17,3 +17,11 @@
 # Zyte API (PRINCIPAL — Método Z). Unlocker anti-bot gerenciado; pegue a API key em
 # https://app.zyte.com (Zyte API → Get API key). Crédito grátis mensal cobre ~1 download/dia.
 export ZYTE_API_KEY=""
+
+# (OPCIONAL) Monitoramento de uso da Zyte no heartbeat de WhatsApp. A Zyte não tem
+# endpoint de "saldo restante"; isto mostra uso/sucesso/gasto dos últimos 7 dias.
+#   ZYTE_STATS_KEY = "Zyte dashboard API key" (app.zyte.com → Settings) — NÃO é a key acima
+#   ZYTE_ORG_ID    = organization id (na URL: app.zyte.com/o/XXXXXX)
+# No GitHub Actions, cadastre os Secrets ZYTE_STATS_KEY e ZYTE_ORG_ID p/ ativar no CI.
+export ZYTE_STATS_KEY=""
+export ZYTE_ORG_ID=""
