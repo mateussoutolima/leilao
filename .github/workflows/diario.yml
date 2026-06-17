@@ -94,7 +94,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add leilao_state.json imoveis.json dashboard_leilao.html \
                   validate_queue.json last_summary.json whatsapp_outbox.json \
-                  whatsapp_sent.json download_status.json "planilhas leilao" 2>/dev/null || true
+                  whatsapp_sent.json download_status.json shortlinks.json "planilhas leilao" 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Nada mudou — nada a commitar."
           else

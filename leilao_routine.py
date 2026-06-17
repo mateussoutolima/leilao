@@ -281,7 +281,47 @@ def fmt_brl(n):
 
 MSG_MAX_ITEMS = 50  # quantos imóveis listar na mensagem antes de resumir o restante
 
-def build_message_body(alarm, news):
+# ----------------------------- encurtador de link (TinyURL) -----------------------------
+def load_shortlinks():
+    if os.path.exists(SHORTLINKS):
+        try:
+            with open(SHORTLINKS, encoding='utf-8') as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+def save_shortlinks(cache):
+    try:
+        with open(SHORTLINKS, 'w', encoding='utf-8') as f:
+            json.dump(cache, f, ensure_ascii=False, indent=1)
+    except Exception:
+        pass
+
+def shorten_url(url, cache):
+    """Encurta o link da Caixa via TinyURL — fica curto E clicável no WhatsApp.
+    Usa cache (não reencurta o mesmo imóvel) e é best-effort: se a rede falhar,
+    devolve o link completo (que continua clicável). Desligável com LEILAO_SHORTEN=0."""
+    if not url:
+        return url
+    if (os.environ.get('LEILAO_SHORTEN') or '1').strip().lower() in ('0', 'false', 'no'):
+        return url
+    if cache is not None and url in cache:
+        return cache[url]
+    import urllib.parse, urllib.request
+    api = "https://tinyurl.com/api-create.php?url=" + urllib.parse.quote(url, safe='')
+    try:
+        with urllib.request.urlopen(api, timeout=15) as resp:
+            short = resp.read().decode('utf-8', 'ignore').strip()
+        if short.startswith('http') and 'tinyurl.com' in short:
+            if cache is not None:
+                cache[url] = short
+            return short
+    except Exception:
+        pass
+    return url
+
+def build_message_body(alarm, news, cache=None):
     name = alarm.get('name') or 'Alarme'
     lines = [f"🏠 *{name}* — {len(news)} nova(s) oportunidade(s)", "Leilão Caixa · Paraíba", ""]
     for r in sorted(news, key=lambda r: -(r.get('score') or 0))[:MSG_MAX_ITEMS]:
@@ -292,7 +332,7 @@ def build_message_body(alarm, news):
         )
         if r.get('endereco'):
             lines.append(f"  📍 {r['endereco']}")
-        lines.append(f"  {r.get('link')}")
+        lines.append(f"  🔗 {shorten_url(r.get('link'), cache)}")
     if len(news) > MSG_MAX_ITEMS:
         lines.append(f"…+{len(news) - MSG_MAX_ITEMS} outras no painel.")
     return "\n".join(lines)
@@ -342,6 +382,7 @@ def build_outbox(records, alarms, seen):
     """One message per (alarm with recipients) x recipient, only when there are NEW matches."""
     today = datetime.date.today().isoformat()
     messages = []
+    cache = load_shortlinks()   # cache persistente de links encurtados
     for a in alarms:
         if not a.get('enabled'): continue
         recips = [str(x).strip() for x in (a.get('recipients') or []) if str(x).strip()]
@@ -349,7 +390,7 @@ def build_outbox(records, alarms, seen):
         am = [r for r in records if match_alarm(r, a)]
         anew = [r for r in am if r['id'] not in seen]
         if not anew: continue
-        body = build_message_body(a, anew)
+        body = build_message_body(a, anew, cache)
         bhash = hashlib.md5(body.encode('utf-8')).hexdigest()[:8]
         for to in recips:
             messages.append({
@@ -358,6 +399,7 @@ def build_outbox(records, alarms, seen):
                 'alarmId': a.get('id'), 'alarmName': a.get('name'),
                 'newCount': len(anew),
             })
+    save_shortlinks(cache)
     return {'date': today, 'generatedAt': datetime.datetime.now().isoformat(),
             'messages': messages}
 
