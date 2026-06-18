@@ -6,7 +6,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA DOUTOR AUGUSTO D A FILHO, N. 120, Apto 404, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426688911",
-  "score": 88.8,
+  "score": 88.1,
   "desconto": 61.02
  },
  {
@@ -16,7 +16,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA INACIO ALBINO NETO, N. 240, Apto 406, 3 ANDAR DO TIPO A DO BL 17",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787709141126",
-  "score": 86.3,
+  "score": 85.7,
   "desconto": 59.02
  },
  {
@@ -26,7 +26,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA ROMUALDO ROLIM, N. 80, Apto 104, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8555517993557",
-  "score": 81.8,
+  "score": 81.2,
   "desconto": 55.31
  },
  {
@@ -36,7 +36,7 @@
   "bairro": "VALENTINA DE FIGUEIREDO",
   "endereco": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452",
-  "score": 77.9,
+  "score": 77.4,
   "desconto": 53.04
  },
  {
@@ -46,7 +46,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
-  "score": 77.0,
+  "score": 76.5,
   "desconto": 54.48
  },
  {
@@ -56,7 +56,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 101, BL A",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422950042",
-  "score": 76.4,
+  "score": 75.9,
   "desconto": 52.18
  },
  {
@@ -66,7 +66,7 @@
   "bairro": "MUCUMAGRO",
   "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2º ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
-  "score": 73.8,
+  "score": 73.3,
   "desconto": 51.11
  }
 ]
