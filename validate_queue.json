@@ -6,7 +6,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA DOUTOR AUGUSTO D A FILHO, N. 120, Apto 404, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426688911",
-  "score": 88.1,
+  "score": 88.2,
   "desconto": 61.02
  },
  {
@@ -36,7 +36,7 @@
   "bairro": "VALENTINA DE FIGUEIREDO",
   "endereco": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452",
-  "score": 77.4,
+  "score": 77.6,
   "desconto": 53.04
  },
  {
@@ -46,7 +46,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
-  "score": 76.5,
+  "score": 76.7,
   "desconto": 54.48
  },
  {
@@ -56,7 +56,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 101, BL A",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422950042",
-  "score": 75.9,
+  "score": 76.1,
   "desconto": 52.18
  },
  {
@@ -66,7 +66,17 @@
   "bairro": "MUCUMAGRO",
   "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2º ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
-  "score": 73.3,
+  "score": 73.5,
   "desconto": 51.11
+ },
+ {
+  "id": "8787711254200",
+  "query": "RUA MARLUCE BELMONT CAVALCANTE 80 A 3º ANDAR BL03, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "GRAMAME",
+  "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 402A, 3º ANDAR, BL03",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711254200",
+  "score": 73.3,
+  "desconto": 51.66
  }
 ]
