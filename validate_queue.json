@@ -1,22 +1,12 @@
 [
  {
-  "id": "8444426688911",
-  "query": "RUA DOUTOR AUGUSTO D A FILHO 120 BL C, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
-  "endereco": "RUA DOUTOR AUGUSTO D A FILHO, N. 120, Apto 404, BL C",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444426688911",
-  "score": 88.2,
-  "desconto": 61.02
- },
- {
   "id": "8787709141126",
   "query": "RUA INACIO ALBINO NETO 240 3 ANDAR DO TIPO A DO BL 17, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
   "bairro": "GRAMAME",
   "endereco": "RUA INACIO ALBINO NETO, N. 240, Apto 406, 3 ANDAR DO TIPO A DO BL 17",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787709141126",
-  "score": 85.7,
+  "score": 85.8,
   "desconto": 59.02
  },
  {
@@ -28,16 +18,6 @@
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8555517993557",
   "score": 81.2,
   "desconto": 55.31
- },
- {
-  "id": "8787704234452",
-  "query": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO 700 BL E, VALENTINA DE FIGUEIREDO, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "VALENTINA DE FIGUEIREDO",
-  "endereco": "RUA TELEGRAFISTA CHATEAUBRIAND BRASIL FILHO, N. 700, Apto 206, BL E",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787704234452",
-  "score": 77.6,
-  "desconto": 53.04
  },
  {
   "id": "8444422881156",
@@ -76,7 +56,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 402A, 3º ANDAR, BL03",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711254200",
-  "score": 73.3,
+  "score": 73.4,
   "desconto": 51.66
  }
 ]
