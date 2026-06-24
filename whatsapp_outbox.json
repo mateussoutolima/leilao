@@ -1,27 +1,27 @@
 {
- "date": "2026-06-23",
- "generatedAt": "2026-06-23T16:08:14.331050",
+ "date": "2026-06-24",
+ "generatedAt": "2026-06-24T12:30:01.523413",
  "messages": [
   {
-   "key": "2026-06-23:status:+5548999001155:0b878c71",
+   "key": "2026-06-24:status:+5548999001155:0b878c71",
    "to": "+5548999001155",
-   "body": "🤖 *Leilão PB — status do run* · 23/06/2026 16:08\n✅ Rodou e baixou planilha NOVA\n📥 via Zyte (Método Z)\n   Lista_imoveis_PB_20260623_160808.csv · 298 KB\n🏙️ João Pessoa: 410 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 35 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 24 req · 79% ok · ~US$ 0.0133\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
+   "body": "🤖 *Leilão PB — status do run* · 24/06/2026 12:30\n✅ Rodou e baixou planilha NOVA\n📥 via Zyte (Método Z)\n   Lista_imoveis_PB_20260624_122957.csv · 291 KB\n🏙️ João Pessoa: 404 imóveis · 1 novo(s) desde a baseline\n🔔 Alarme: 36 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 19 req · 74% ok · ~US$ 0.0098\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
    "alarmId": "status",
    "alarmName": "Status do run",
    "newCount": 0
   },
   {
-   "key": "2026-06-23:status:+5548996731606:0b878c71",
+   "key": "2026-06-24:status:+5548996731606:0b878c71",
    "to": "+5548996731606",
-   "body": "🤖 *Leilão PB — status do run* · 23/06/2026 16:08\n✅ Rodou e baixou planilha NOVA\n📥 via Zyte (Método Z)\n   Lista_imoveis_PB_20260623_160808.csv · 298 KB\n🏙️ João Pessoa: 410 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 35 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 24 req · 79% ok · ~US$ 0.0133\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
+   "body": "🤖 *Leilão PB — status do run* · 24/06/2026 12:30\n✅ Rodou e baixou planilha NOVA\n📥 via Zyte (Método Z)\n   Lista_imoveis_PB_20260624_122957.csv · 291 KB\n🏙️ João Pessoa: 404 imóveis · 1 novo(s) desde a baseline\n🔔 Alarme: 36 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 19 req · 74% ok · ~US$ 0.0098\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
    "alarmId": "status",
    "alarmName": "Status do run",
    "newCount": 0
   },
   {
-   "key": "2026-06-23:status:120363404074701921-group:0b878c71",
+   "key": "2026-06-24:status:120363404074701921-group:0b878c71",
    "to": "120363404074701921-group",
-   "body": "🤖 *Leilão PB — status do run* · 23/06/2026 16:08\n✅ Rodou e baixou planilha NOVA\n📥 via Zyte (Método Z)\n   Lista_imoveis_PB_20260623_160808.csv · 298 KB\n🏙️ João Pessoa: 410 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 35 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 24 req · 79% ok · ~US$ 0.0133\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
+   "body": "🤖 *Leilão PB — status do run* · 24/06/2026 12:30\n✅ Rodou e baixou planilha NOVA\n📥 via Zyte (Método Z)\n   Lista_imoveis_PB_20260624_122957.csv · 291 KB\n🏙️ João Pessoa: 404 imóveis · 1 novo(s) desde a baseline\n🔔 Alarme: 36 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 19 req · 74% ok · ~US$ 0.0098\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
    "alarmId": "status",
    "alarmName": "Status do run",
    "newCount": 0
