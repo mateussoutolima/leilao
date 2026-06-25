@@ -2,13 +2,13 @@
  "ok": true,
  "fresh": true,
  "method": "Z",
- "csv": "Lista_imoveis_PB_20260624_153955.csv",
- "bytes": 297736,
- "ts": "24/06/2026 15:39:57",
+ "csv": "Lista_imoveis_PB_20260625_123343.csv",
+ "bytes": 296830,
+ "ts": "25/06/2026 12:33:52",
  "zyte": {
-  "reqs7d": 18,
-  "ok7d": 13,
-  "successPct": 72,
-  "costUsd7d": 0.0091
+  "reqs7d": 16,
+  "ok7d": 14,
+  "successPct": 88,
+  "costUsd7d": 0.0098
  }
 }
