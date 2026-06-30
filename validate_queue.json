@@ -6,7 +6,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA INACIO ALBINO NETO, N. 240, Apto 406, 3 ANDAR DO TIPO A DO BL 17",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787709141126",
-  "score": 88.9,
+  "score": 88.8,
   "desconto": 61.75
  },
  {
@@ -16,7 +16,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA ROMUALDO ROLIM, N. 80, Apto 104, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8555517993557",
-  "score": 80.7,
+  "score": 80.8,
   "desconto": 55.31
  },
  {
@@ -26,7 +26,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 101, BL A",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422950042",
-  "score": 77.7,
+  "score": 77.8,
   "desconto": 53.55
  },
  {
@@ -36,18 +36,8 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
-  "score": 76.6,
+  "score": 76.9,
   "desconto": 54.48
- },
- {
-  "id": "8787711254200",
-  "query": "RUA MARLUCE BELMONT CAVALCANTE 80 A 3º ANDAR BL03, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "GRAMAME",
-  "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 402A, 3º ANDAR, BL03",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711254200",
-  "score": 73.3,
-  "desconto": 51.66
  },
  {
   "id": "8787702605445",
@@ -56,7 +46,7 @@
   "bairro": "MUCUMAGRO",
   "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2º ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
-  "score": 73.3,
+  "score": 73.5,
   "desconto": 51.11
  }
 ]
