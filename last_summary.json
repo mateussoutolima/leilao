@@ -1,13 +1,13 @@
 {
-  "csv": "Lista_imoveis_PB_20260701_155953.csv",
-  "total": 403,
-  "new": 0,
+  "csv": "Lista_imoveis_PB_20260702_122152.csv",
+  "total": 406,
+  "new": 1,
   "matched": 18,
   "matchedNew": 0,
   "toValidate": 5,
-  "alreadyValidated": 305,
+  "alreadyValidated": 308,
   "baselineSet": true,
   "whatsappQueued": 3,
-  "lastRun": "01/07/2026 15:59",
+  "lastRun": "02/07/2026 12:21",
   "topNew": []
 }
