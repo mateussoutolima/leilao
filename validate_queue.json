@@ -1,12 +1,32 @@
 [
  {
+  "id": "8444407888617",
+  "query": "Rua Ana Leal Ramos 141, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "GRAMAME",
+  "endereco": "Rua Ana Leal Ramos, N. 141, Apto 201",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444407888617",
+  "score": 89.8,
+  "desconto": 64.35
+ },
+ {
   "id": "8555517993557",
   "query": "RUA ROMUALDO ROLIM 80 BL E, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
   "bairro": "GRAMAME",
   "endereco": "RUA ROMUALDO ROLIM, N. 80, Apto 104, BL E",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8555517993557",
-  "score": 80.7,
+  "score": 82.1,
+  "desconto": 58.1
+ },
+ {
+  "id": "8444422881156",
+  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL D, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "GRAMAME",
+  "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
+  "score": 76.2,
   "desconto": 55.31
  },
  {
@@ -16,18 +36,8 @@
   "bairro": "GRAMAME",
   "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 402A, 3º ANDAR, BL03",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711254200",
-  "score": 76.0,
+  "score": 73.7,
   "desconto": 53.04
- },
- {
-  "id": "8444403331561",
-  "query": "RUA ARAUCARIA 158 PAV 1, PARATIBE, JOAO PESSOA, Paraiba, Brasil",
-  "cidade": "JOAO PESSOA",
-  "bairro": "PARATIBE",
-  "endereco": "RUA ARAUCARIA, N. 158, Apto 202, PAV 1",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444403331561",
-  "score": 73.8,
-  "desconto": 50.82
  },
  {
   "id": "8787702605445",
@@ -36,7 +46,37 @@
   "bairro": "MUCUMAGRO",
   "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2º ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
-  "score": 73.7,
-  "desconto": 51.11
+  "score": 73.6,
+  "desconto": 52.51
+ },
+ {
+  "id": "8444403331561",
+  "query": "RUA ARAUCARIA 158 PAV 1, PARATIBE, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "PARATIBE",
+  "endereco": "RUA ARAUCARIA, N. 158, Apto 202, PAV 1",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444403331561",
+  "score": 71.4,
+  "desconto": 50.82
+ },
+ {
+  "id": "8444422862739",
+  "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL C, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "GRAMAME",
+  "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 403, BL C",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422862739",
+  "score": 69.4,
+  "desconto": 50.27
+ },
+ {
+  "id": "8787718945682",
+  "query": "RUA MARIA EMILIA DE ALMEIDA WANDERLEY 45 3° ANDAR, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "GRAMAME",
+  "endereco": "RUA MARIA EMILIA DE ALMEIDA WANDERLEY, N. 45, Apto 403, 3° ANDAR",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787718945682",
+  "score": 68.1,
+  "desconto": 50.27
  }
 ]
