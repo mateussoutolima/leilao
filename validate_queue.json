@@ -6,7 +6,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 204, BL D",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422881156",
-  "score": 78.5,
+  "score": 73.7,
   "desconto": 55.31
  },
  {
@@ -16,7 +16,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 402A, 3º ANDAR, BL03",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711254200",
-  "score": 76.0,
+  "score": 71.4,
   "desconto": 53.04
  },
  {
@@ -26,7 +26,7 @@
   "bairro": "MUCUMAGRO",
   "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2º ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
-  "score": 75.8,
+  "score": 71.3,
   "desconto": 52.51
  },
  {
@@ -36,7 +36,7 @@
   "bairro": "PARATIBE",
   "endereco": "RUA ARAUCARIA, N. 158, Apto 202, PAV 1",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444403331561",
-  "score": 73.6,
+  "score": 69.2,
   "desconto": 50.82
  },
  {
@@ -46,7 +46,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 403, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422862739",
-  "score": 71.4,
+  "score": 67.2,
   "desconto": 50.27
  },
  {
@@ -56,7 +56,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA MARIA EMILIA DE ALMEIDA WANDERLEY, N. 45, Apto 403, 3° ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787718945682",
-  "score": 70.2,
+  "score": 66.0,
   "desconto": 50.27
  }
 ]
