@@ -4,11 +4,11 @@
  "method": null,
  "csv": null,
  "bytes": 0,
- "ts": "15/07/2026 11:52:05",
+ "ts": "15/07/2026 15:07:11",
  "zyte": {
-  "reqs7d": 13,
-  "ok7d": 13,
-  "successPct": 100,
-  "costUsd7d": 0.0091
+  "reqs7d": 15,
+  "ok7d": 12,
+  "successPct": 80,
+  "costUsd7d": 0.0084
  }
 }
