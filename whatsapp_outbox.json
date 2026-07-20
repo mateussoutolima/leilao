@@ -1,27 +1,27 @@
 {
- "date": "2026-07-19",
- "generatedAt": "2026-07-19T14:38:09.279497",
+ "date": "2026-07-20",
+ "generatedAt": "2026-07-20T12:28:37.322972",
  "messages": [
   {
-   "key": "2026-07-19:status:+5548999001155:4f97b123",
+   "key": "2026-07-20:status:+5548999001155:4f97b123",
    "to": "+5548999001155",
-   "body": "🤖 *Leilão PB — status do run* · 19/07/2026 14:38\n⚠️ Rodou, mas NÃO baixou planilha nova hoje\n📥 download falhou (Zyte + curl direto) — usei o último CSV bom:\n   Lista_imoveis_PB_20260714_150603.csv\n   ⚠️ confira o saldo da Zyte e os logs do GitHub Actions\n🏙️ João Pessoa: 414 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 18 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 32 req · 16% ok · ~US$ 0.0035\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
+   "body": "🤖 *Leilão PB — status do run* · 20/07/2026 12:28\n⚠️ Rodou, mas NÃO baixou planilha nova hoje\n📥 download falhou (Zyte + curl direto) — usei o último CSV bom:\n   Lista_imoveis_PB_20260714_150603.csv\n   ⚠️ confira o saldo da Zyte e os logs do GitHub Actions\n🏙️ João Pessoa: 414 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 18 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 34 req · 12% ok · ~US$ 0.0028\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
    "alarmId": "status",
    "alarmName": "Status do run",
    "newCount": 0
   },
   {
-   "key": "2026-07-19:status:+5548996731606:4f97b123",
+   "key": "2026-07-20:status:+5548996731606:4f97b123",
    "to": "+5548996731606",
-   "body": "🤖 *Leilão PB — status do run* · 19/07/2026 14:38\n⚠️ Rodou, mas NÃO baixou planilha nova hoje\n📥 download falhou (Zyte + curl direto) — usei o último CSV bom:\n   Lista_imoveis_PB_20260714_150603.csv\n   ⚠️ confira o saldo da Zyte e os logs do GitHub Actions\n🏙️ João Pessoa: 414 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 18 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 32 req · 16% ok · ~US$ 0.0035\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
+   "body": "🤖 *Leilão PB — status do run* · 20/07/2026 12:28\n⚠️ Rodou, mas NÃO baixou planilha nova hoje\n📥 download falhou (Zyte + curl direto) — usei o último CSV bom:\n   Lista_imoveis_PB_20260714_150603.csv\n   ⚠️ confira o saldo da Zyte e os logs do GitHub Actions\n🏙️ João Pessoa: 414 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 18 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 34 req · 12% ok · ~US$ 0.0028\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
    "alarmId": "status",
    "alarmName": "Status do run",
    "newCount": 0
   },
   {
-   "key": "2026-07-19:status:120363404074701921-group:4f97b123",
+   "key": "2026-07-20:status:120363404074701921-group:4f97b123",
    "to": "120363404074701921-group",
-   "body": "🤖 *Leilão PB — status do run* · 19/07/2026 14:38\n⚠️ Rodou, mas NÃO baixou planilha nova hoje\n📥 download falhou (Zyte + curl direto) — usei o último CSV bom:\n   Lista_imoveis_PB_20260714_150603.csv\n   ⚠️ confira o saldo da Zyte e os logs do GitHub Actions\n🏙️ João Pessoa: 414 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 18 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 32 req · 16% ok · ~US$ 0.0035\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
+   "body": "🤖 *Leilão PB — status do run* · 20/07/2026 12:28\n⚠️ Rodou, mas NÃO baixou planilha nova hoje\n📥 download falhou (Zyte + curl direto) — usei o último CSV bom:\n   Lista_imoveis_PB_20260714_150603.csv\n   ⚠️ confira o saldo da Zyte e os logs do GitHub Actions\n🏙️ João Pessoa: 414 imóveis · 0 novo(s) desde a baseline\n🔔 Alarme: 18 no filtro · 0 novos → nada a avisar 👍\n💳 Zyte (7d): 34 req · 12% ok · ~US$ 0.0028\n\n🎯 Filtros — \"Imoveis Joao Pessoa\":\n   tipo: Apartamento\n   cidade: Joao Pessoa\n   bairros: Gramame, Mucumagro, Paratibe, Planalto Boa Esperanca, Valentina De Figueiredo\n   desc ≥ 50% · preço ≤ R$ 70.000 · quartos ≥ 1",
    "alarmId": "status",
    "alarmName": "Status do run",
    "newCount": 0
