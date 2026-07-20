@@ -1,5 +1,15 @@
 [
  {
+  "id": "8555517993557",
+  "query": "RUA ROMUALDO ROLIM 80 BL E, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
+  "cidade": "JOAO PESSOA",
+  "bairro": "GRAMAME",
+  "endereco": "RUA ROMUALDO ROLIM, N. 80, Apto 104, BL E",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8555517993557",
+  "score": 82.6,
+  "desconto": 60.89
+ },
+ {
   "id": "8444422881156",
   "query": "RUA JOSINALDO FLORENCIO DA SILVA 179 BL D, GRAMAME, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
@@ -16,18 +26,18 @@
   "bairro": "GRAMAME",
   "endereco": "RUA MARLUCE BELMONT CAVALCANTE, N. 80, Apto 303, LOT 132 QD 212 BL 3",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787711374612",
-  "score": 73.1,
+  "score": 72.9,
   "desconto": 55.31
  },
  {
-  "id": "8787702605445",
-  "query": "RUA CAFEZAIS 32 2º ANDAR, MUCUMAGRO, JOAO PESSOA, Paraiba, Brasil",
+  "id": "8787701074691",
+  "query": "RUA DOM HELDER CAMARA 559 3º ANDAR, MUCUMAGRO, JOAO PESSOA, Paraiba, Brasil",
   "cidade": "JOAO PESSOA",
   "bairro": "MUCUMAGRO",
-  "endereco": "RUA CAFEZAIS, N. 32, Apto 304, 2º ANDAR",
-  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787702605445",
-  "score": 71.3,
-  "desconto": 52.51
+  "endereco": "RUA DOM HELDER CAMARA, N. 559, Apto 401, 3º ANDAR BLOCO A",
+  "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787701074691",
+  "score": 70.1,
+  "desconto": 50.82
  },
  {
   "id": "8444403331561",
@@ -36,7 +46,7 @@
   "bairro": "PARATIBE",
   "endereco": "RUA ARAUCARIA, N. 158, Apto 202, PAV 1",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444403331561",
-  "score": 69.2,
+  "score": 69.1,
   "desconto": 50.82
  },
  {
@@ -46,7 +56,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA JOSINALDO FLORENCIO DA SILVA, N. 179, Apto 403, BL C",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444422862739",
-  "score": 67.2,
+  "score": 67.1,
   "desconto": 50.27
  },
  {
@@ -56,7 +66,7 @@
   "bairro": "GRAMAME",
   "endereco": "RUA MARIA EMILIA DE ALMEIDA WANDERLEY, N. 45, Apto 403, 3° ANDAR",
   "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8787718945682",
-  "score": 66.0,
+  "score": 65.9,
   "desconto": 50.27
  }
 ]

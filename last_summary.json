@@ -1,13 +1,24 @@
 {
-  "csv": "Lista_imoveis_PB_20260714_150603.csv",
-  "total": 414,
-  "new": 0,
-  "matched": 18,
-  "matchedNew": 0,
-  "toValidate": 6,
-  "alreadyValidated": 281,
+  "csv": "Lista_imoveis_PB_20260720_152418.csv",
+  "total": 436,
+  "new": 20,
+  "matched": 22,
+  "matchedNew": 1,
+  "toValidate": 7,
+  "alreadyValidated": 295,
   "baselineSet": true,
-  "whatsappQueued": 3,
-  "lastRun": "20/07/2026 12:28",
-  "topNew": []
+  "whatsappQueued": 6,
+  "lastRun": "20/07/2026 15:24",
+  "topNew": [
+    {
+      "id": "8444423072740",
+      "score": 74.1,
+      "desconto": 55.31,
+      "preco": 63026.77,
+      "cidade": "JOAO PESSOA",
+      "bairro": "GRAMAME",
+      "tipo": "Apartamento",
+      "link": "https://venda-imoveis.caixa.gov.br/sistema/detalhe-imovel.asp?hdnimovel=8444423072740"
+    }
+  ]
 }
